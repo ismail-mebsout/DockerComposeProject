@@ -1,0 +1,29 @@
+
+version: '3'
+
+services:
+
+  datascience_api:
+    container_name: datascience_api
+    hostname: datascience_api
+    build:
+      context: ./datascience_api
+      dockerfile: Dockerfile
+    ports:
+     - 8080:8080
+    restart: unless-stopped
+
+  front:
+    container_name: frontend
+    hostname: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 8501:8501
+    restart: unless-stopped
+    depends_on:
+      - datascience_api
+
+
+    
